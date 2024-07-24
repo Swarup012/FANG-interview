@@ -5,7 +5,7 @@ function QuestionSection({interviewQuestions,actionQuestionIndex}) {
     <div className='m-10 p-5 border rounded-lg'>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5'>
             {interviewQuestions && interviewQuestions.map((questions,index)=>(
-                <h2 key={index} className= {`p-3 bg-secondary rounded-lg border text-center ${actionQuestionIndex==index&&'bg-blue-600 text-white'}`}>Question #{index+1}</h2>
+                <h2 key={index} className= {`p-3 bg-secondary rounded-lg border text-center ${actionQuestionIndex==index&&'bg-yellow-600 text-white'}`}>Question #{index+1}</h2>
             ))}
         </div>
         <h2 className='my-5 text-sm md:text-lg'>{interviewQuestions[actionQuestionIndex]?.Question}</h2>

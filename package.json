@@ -11,6 +11,8 @@
     "db:studio": "npx drizzle-kit studio"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.24.7",
+    "@babel/runtime": "^7.24.8",
     "@clerk/nextjs": "^5.2.3",
     "@google/generative-ai": "^0.15.0",
     "@neondatabase/serverless": "^0.9.4",
@@ -32,6 +34,7 @@
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@types/regenerator-runtime": "^0.13.6",
     "drizzle-kit": "^0.23.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",

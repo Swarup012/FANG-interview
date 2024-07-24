@@ -1,42 +1,46 @@
-import React, { useState } from 'react';
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import { Button } from "@/components/ui/button";
+import { Mic } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 const SpeechToTextComponent = () => {
-//   const [isRecording, setIsRecording] = useState(false);
-//   const { transcript, interimTranscript, finalTranscript, resetTranscript } = useSpeechRecognition();
+  const [userAnswer, setUserAnswer] = useState();
 
-//   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-//     return <div>Your browser does not support speech recognition.</div>;
-//   }
+  const {
+    error,
+    interimResult,
+    isRecording,
+    results,
+    startSpeechToText,
+    stopSpeechToText,
+  } = useSpeechToText({
+    continuous: true,
+    useLegacyResults: false,
+  });
+  useEffect(() => {
+    results.map(
+      (result) => {
+        setUserAnswer((prevAns) => prevAns + result?.transcript);
+      },
+      [results]
+    );
+  });
+  if (error) return <p>Web Speech API is not available in this browser 🤷‍</p>;
 
-//   const startSpeechToText = () => {
-//     setIsRecording(true);
-//     SpeechRecognition.startListening({ continuous: true });
-//   };
-
-//   const stopSpeechToText = () => {
-//     setIsRecording(false);
-//     SpeechRecognition.stopListening();
-//   };
-
-//   return (
-//     <div>
-//       <h1>Recording: {isRecording.toString()}</h1>
-//       <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
-//         {isRecording ? 'Stop Recording' : 'Start Recording'}
-//       </button>
-//       <button onClick={resetTranscript}>Reset Transcript</button>
-//       <ul>
-//         {finalTranscript.split('\n').map((result, index) => (
-//           <li key={index}>{result}</li>
-//         ))}
-//         {interimTranscript && <li>{interimTranscript}</li>}
-//       </ul>
-//     </div>
-//   );
-// };
-
-
-
+  return (
+    <div>
+      {/* <h1>Recording: {isRecording.toString()}</h1> */}
+      <button onClick={isRecording ? stopSpeechToText : startSpeechToText}>
+        {isRecording ? (
+          <h2 className="text-red-600">
+            <Mic /> Recording...
+          </h2>
+        ) : (
+          "Start Recording"
+        )}
+      </button>
+      <Button onclick={() => console.log(userAnswer)}>show answer</Button>
+    </div>
+  );
+};
 
 export default SpeechToTextComponent;
